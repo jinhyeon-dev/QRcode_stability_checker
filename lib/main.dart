@@ -13,7 +13,74 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: QRscannerScreen(),
+      home: SplashScreen(),
     );
   }
 }
+
+
+
+// 팝업창
+
+// import 'package:flutter/material.dart';
+//
+// /// Flutter code sample for [Dialog].
+//
+// void main() => runApp(const DialogExampleApp());
+//
+// class DialogExampleApp extends StatelessWidget {
+//   const DialogExampleApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text('Dialog Sample')),
+//         body: const Center(
+//           child: DialogExample(),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class DialogExample extends StatelessWidget {
+//   const DialogExample({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: <Widget>[
+//         TextButton(
+//           onPressed: () => showDialog<String>(
+//             context: context,
+//             builder: (BuildContext context) => Dialog(
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.zero,
+//               ),
+//               child: Padding(
+//                 padding: const EdgeInsets.all(50.0),
+//                 child: Column(
+//                   mainAxisSize: MainAxisSize.min,
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: <Widget>[
+//                     const Text('응 팝업이야'),
+//                     const SizedBox(height: 50),
+//                     TextButton(
+//                       onPressed: () {
+//                         Navigator.pop(context);
+//                       },
+//                       child: const Text('Close'),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//           child: const Text('Show Dialog'),
+//         ),
+//       ],
+//     );
+//   }
+// }

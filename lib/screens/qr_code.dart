@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -38,24 +40,32 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              height: 100,
+            Expanded(
+              flex: 5,
               child: QRView(
                 key: _qrKey,
                 onQRViewCreated: _onQRViewCreated,
               ),
             ),
-            Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+            Expanded(
+              flex: 3,
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Text('Scan a QR code'),
+                child: Center(
+                  child: Text(
+                    'Scan a QR code',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
