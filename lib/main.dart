@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qrcode_stability_checker/screens/qr_code.dart';
+import 'package:qrcode_stability_checker/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

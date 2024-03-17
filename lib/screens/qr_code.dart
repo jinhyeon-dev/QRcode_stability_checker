@@ -27,19 +27,33 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("성능 좋은 qr 스캐너"),
+          backgroundColor: Colors.blue,
+          title: const Text(
+            "QRSafe",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(
-              flex: 5,
+            Container(
+              height: 100,
               child: QRView(
                 key: _qrKey,
                 onQRViewCreated: _onQRViewCreated,
               ),
             ),
-            const Expanded(
-              flex: 3,
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
               child: Center(
                 child: Text('Scan a QR code'),
               ),
