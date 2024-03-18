@@ -27,7 +27,7 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xff394867),
+          backgroundColor: const Color(0xff394867),
           title: const Text(
             "QRSafe",
             style: TextStyle(
@@ -35,13 +35,9 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
             ),
           ),
         ),
-/*-----------------------------------------------------------*/
-        //body
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-/*-----------------------------------------------------------*/
-            // QRView
             Expanded(
               flex: 5,
               child: QRView(
@@ -49,7 +45,6 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
                 onQRViewCreated: _onQRViewCreated,
               ),
             ),
-/*-----------------------------------------------------------*/
             Expanded(
               flex: 1,
               child: Container(
@@ -65,7 +60,6 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
                 ),
               ),
             ),
-/*-----------------------------------------------------------*/
           ],
         ),
       ),
@@ -78,7 +72,9 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
       _controller.scannedDataStream.listen((scanData) {
         final scannedQRCode = scanData.code;
         if (scannedQRCode != _previousQRCode) {
+          _controller.pauseCamera(); // QR 코드 스캐너 일시 중지
           _saveAndSendQRCode(scannedQRCode!);
+          _showQRCodeDialog(scannedQRCode!); // QR 코드 팝업창 표시
           print("Scanned QR Code: $scannedQRCode");
           _previousQRCode = scannedQRCode;
         }
@@ -89,7 +85,6 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
   Future<void> _saveAndSendQRCode(String qrCode) async {
     _scannedQRCodes.add(qrCode); // QR 코드 데이터 저장
     await _sendQRCodeToServer(qrCode); // 백엔드 서버로 QR 코드 데이터 전송
-    await _showQRCodeDialog(qrCode); // QR 코드 팝업창 표시
   }
 
   Future<void> _showQRCodeDialog(String qrCode) async {
@@ -108,9 +103,11 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('확인'),
+              child: const Text('닫기'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // 팝업창 닫기
+                _controller.resumeCamera(); // QR 코드 스캐너 다시 활성화
+                _previousQRCode = null; // _previousQRCode 초기화
               },
             ),
           ],
@@ -121,7 +118,7 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
 
   Future<void> _sendQRCodeToServer(String qrCode) async {
     final url = Uri.parse('');
-    final response = await http.post(url, body: {'url': qrCode});
+    final response = await http.post(url, body: {'https://api.example.com': qrCode});
     print(response.statusCode == 200 ? 'QR Code 안정성 검사 중..' : 'Network Error!');
   }
 }
