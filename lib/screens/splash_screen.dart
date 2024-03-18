@@ -33,14 +33,15 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Color(0xff394867),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("QRSafe", style: TextStyle(
-              fontSize: 18,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Colors.white,
             ),)
           ],
         ),

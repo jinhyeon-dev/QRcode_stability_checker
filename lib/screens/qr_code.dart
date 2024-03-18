@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -29,7 +27,7 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xff394867),
           title: const Text(
             "QRSafe",
             style: TextStyle(
@@ -37,9 +35,13 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
             ),
           ),
         ),
+/*-----------------------------------------------------------*/
+        //body
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+/*-----------------------------------------------------------*/
+            // QRView
             Expanded(
               flex: 5,
               child: QRView(
@@ -47,18 +49,13 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
                 onQRViewCreated: _onQRViewCreated,
               ),
             ),
+/*-----------------------------------------------------------*/
             Expanded(
-              flex: 3,
+              flex: 1,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                ),
-                child: Center(
+                color: const Color(0xff394867),
+                child: const Center(
                   child: Text(
                     'Scan a QR code',
                     style: TextStyle(
@@ -68,6 +65,7 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
                 ),
               ),
             ),
+/*-----------------------------------------------------------*/
           ],
         ),
       ),
@@ -124,12 +122,6 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
   Future<void> _sendQRCodeToServer(String qrCode) async {
     final url = Uri.parse('');
     final response = await http.post(url, body: {'url': qrCode});
-
-    if (response.statusCode == 200) {
-      print('QR Code 안전성 검사 중..');
-    } else {
-      print('Network Error!');
-      print('네트워크 연결을 확인하세요!');
-    }
+    print(response.statusCode == 200 ? 'QR Code 안정성 검사 중..' : 'Network Error!');
   }
 }
