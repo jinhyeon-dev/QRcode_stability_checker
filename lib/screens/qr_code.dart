@@ -84,7 +84,7 @@ class _QRscannerScreenState extends State<QRscannerScreen> {
 
   Future<void> _saveAndSendQRCode(String qrCode) async {
     _scannedQRCodes.add(qrCode); // QR 코드 데이터 저장
-    await _sendQRCodeToServer(qrCode); // 백엔드 서버로 QR 코드 데이터 전송
+    await _sendQRCodeToServer(qrCode); // 백엔드 서버로 QR 코드 데이터 전
   }
 
   Future<void> _showQRCodeDialog(String qrCode) async {
